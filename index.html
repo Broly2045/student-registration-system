@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Registration System - A comprehensive platform for managing student records with add, edit, and delete functionalities">
+    <meta name="keywords" content="student registration, student management, record keeping">
+    <meta name="author" content="Student Portal">
+    <title>Student Registration System | Manage Student Records</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-content">
+            <h1>🎓 Student Registration System</h1>
+            <p class="header-description">Efficiently manage student records with our intuitive registration platform. Add, edit, and delete student information seamlessly.</p>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Registration Form Section -->
+        <section class="form-section">
+            <h2 class="section-title">Register Student</h2>
+            <form id="studentForm" novalidate>
+                <div class="form-group">
+                    <label for="studentName">Student Name</label>
+                    <input 
+                        type="text" 
+                        id="studentName" 
+                        name="studentName" 
+                        placeholder="Enter full name"
+                        required
+                        aria-label="Student Name"
+                    >
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input 
+                        type="text" 
+                        id="studentId" 
+                        name="studentId" 
+                        placeholder="Enter student ID"
+                        required
+                        aria-label="Student ID"
+                    >
+                    <span class="error-message" id="idError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="student@example.com"
+                        required
+                        aria-label="Email Address"
+                    >
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number</label>
+                    <input 
+                        type="tel" 
+                        id="contactNumber" 
+                        name="contactNumber" 
+                        placeholder="Enter 10-digit number"
+                        required
+                        aria-label="Contact Number"
+                    >
+                    <span class="error-message" id="contactError"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span class="btn-text">Add Student</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="resetBtn">
+                        <span class="btn-text">Reset</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Display Section -->
+        <section class="display-section">
+            <h2 class="section-title">Registered Students</h2>
+            <div class="table-container" id="tableContainer">
+                <table id="studentTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Contact No.</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- Student records will be dynamically inserted here -->
+                    </tbody>
+                </table>
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">📋</div>
+                    <p>No students registered yet</p>
+                    <p class="empty-subtext">Add your first student to get started</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Student Registration System. All rights reserved.</p>
+    </footer>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Student Details</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editStudentName">Student Name</label>
+                    <input 
+                        type="text" 
+                        id="editStudentName" 
+                        name="editStudentName" 
+                        required
+                    >
+                    <span class="error-message" id="editNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="editStudentId">Student ID</label>
+                    <input 
+                        type="text" 
+                        id="editStudentId" 
+                        name="editStudentId" 
+                        required
+                    >
+                    <span class="error-message" id="editIdError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEmail">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="editEmail" 
+                        name="editEmail" 
+                        required
+                    >
+                    <span class="error-message" id="editEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="editContactNumber">Contact Number</label>
+                    <input 
+                        type="tel" 
+                        id="editContactNumber" 
+                        name="editContactNumber" 
+                        required
+                    >
+                    <span class="error-message" id="editContactError"></span>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-secondary" id="cancelEdit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
