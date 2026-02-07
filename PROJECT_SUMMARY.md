@@ -41,12 +41,7 @@ I've created a **complete, production-ready Student Registration System** that e
    - Usage guide
    - Assignment compliance checklist
 
-5. **GITHUB_SETUP.md**
-   - Step-by-step GitHub upload guide
-   - Separate commit instructions
-   - Troubleshooting tips
-
-6. **.gitignore**
+5. **.gitignore**
    - Proper Git exclusions
 
 ## 🌟 Standout Features
