@@ -342,6 +342,9 @@ function editStudent(uniqueId) {
     editModal.classList.add('active');
 }
 
+// Make functions globally accessible for inline onclick handlers
+window.editStudent = editStudent;
+
 /**
  * Update student with new data
  * @param {Object} updatedData - Updated student data
@@ -386,6 +389,9 @@ function deleteStudent(uniqueId) {
     showNotification('Student deleted successfully!', 'danger');
 }
 
+// Make function globally accessible for inline onclick handlers
+window.deleteStudent = deleteStudent;
+
 // ============================================
 // MODAL FUNCTIONS
 // ============================================
@@ -424,13 +430,14 @@ function showNotification(message, type = 'success') {
         top: 20px;
         right: 20px;
         padding: 1rem 1.5rem;
-        background: ${type === 'success' ? '#10b981' : '#ef4444'};
+        background: ${type === 'success' ? 'linear-gradient(135deg, #8b5cf6, #7c3aed)' : '#ef4444'};
         color: white;
         border-radius: 0.5rem;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 25px ${type === 'success' ? 'rgba(139, 92, 246, 0.4)' : 'rgba(239, 68, 68, 0.4)'};
         z-index: 10000;
         animation: slideInRight 0.3s ease-out;
-        font-weight: 600;
+        font-weight: 700;
+        border: 1px solid ${type === 'success' ? 'rgba(139, 92, 246, 0.5)' : 'rgba(239, 68, 68, 0.5)'};
     `;
     
     document.body.appendChild(notification);
@@ -469,6 +476,53 @@ studentForm.addEventListener('submit', (e) => {
 });
 
 /**
+ * Validate edit form
+ * @param {Object} formData - Form data to validate
+ * @returns {boolean} True if all validations pass
+ */
+function validateEditForm(formData) {
+    let isValid = true;
+    
+    // Validate name
+    const nameValidation = validateName(formData.name);
+    if (!nameValidation.isValid) {
+        showError('editStudentName', 'editNameError', nameValidation.message);
+        isValid = false;
+    } else {
+        clearError('editStudentName', 'editNameError');
+    }
+    
+    // Validate student ID
+    const idValidation = validateStudentId(formData.id);
+    if (!idValidation.isValid) {
+        showError('editStudentId', 'editIdError', idValidation.message);
+        isValid = false;
+    } else {
+        clearError('editStudentId', 'editIdError');
+    }
+    
+    // Validate email
+    const emailValidation = validateEmail(formData.email);
+    if (!emailValidation.isValid) {
+        showError('editEmail', 'editEmailError', emailValidation.message);
+        isValid = false;
+    } else {
+        clearError('editEmail', 'editEmailError');
+    }
+    
+    // Validate contact
+    const contactValidation = validateContact(formData.contact);
+    if (!contactValidation.isValid) {
+        showError('editContactNumber', 'editContactError', contactValidation.message);
+        isValid = false;
+    } else {
+        clearError('editContactNumber', 'editContactError');
+    }
+    
+    return isValid;
+}
+
+/**
  * Handle edit form submission
  */
 editForm.addEventListener('submit', (e) => {
@@ -481,8 +535,8 @@ editForm.addEventListener('submit', (e) => {
         contact: document.getElementById('editContactNumber').value
     };
     
-    // Validate form with 'edit' prefix
-    if (validateForm(formData, 'edit')) {
+    // Validate edit form
+    if (validateEditForm(formData)) {
         updateStudent(formData);
     }
 });
